@@ -1,8 +1,7 @@
 //
-//  HighlightApp.swift
+//  Data.swift
 //  Highlight
 //
-
 
 /*“Objects” to work with:
 
@@ -31,14 +30,19 @@ Users:
  This should be most of the objects we will work with. Other methods and front-end stuff would determine how memories/agenda/calendar/etc. works. Let’s try to make use of existing libraries and not “reinvent the wheel” this time.
 */
 
+import Foundation
 
-import SwiftUI
-
-@main
-struct HighlightApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+class User {
+    var Relation: [User]
+    
+    init(Relation: [User]) {
+        self.Relation = Relation
     }
 }
+
+
+
+
+
+
+
