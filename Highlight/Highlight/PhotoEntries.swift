@@ -11,15 +11,13 @@
 
 import Foundation
 
-class PhotoEntries {
+class PhotoEntries: Entry {
     var Photo: Photo
     var Date: Date
     var Description: String
     
     init(Photo: Photo, Date: Date, Description: String) {
-        self.Photo = Photo
-        self.Date = Date
-        self.Description = Description
+        super.init(Date: Date, Description: Description)
     }
     
 }
