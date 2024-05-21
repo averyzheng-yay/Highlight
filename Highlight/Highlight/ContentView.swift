@@ -52,7 +52,11 @@ struct ContentView: View {
                 }
                 .padding(.bottom, 20)
                 .sheet(isPresented: $showingAddEntry) {
-                    AddEntryView(viewModel: viewModel)
+                    if #available(iOS 15.0, *) {
+                        AddEntryView(viewModel: viewModel)
+                    } else {
+                        // Fallback on earlier versions
+                    }
                 }
             }
             .navigationTitle("Your Highlights")
