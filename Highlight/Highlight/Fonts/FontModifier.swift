@@ -19,17 +19,17 @@ extension Font {
     static let customFont: (FontWeight, CGFloat) -> Font = { fontType, size in
         switch fontType {
         case .light:
-            Font.custom("Inter-Light", size: size)
+            return Font.custom("Inter-Light", size: size)
         case .regular:
-            Font.custom("Inter-Regular", size: size)
+            return Font.custom("Inter-Regular", size: size)
         case .medium:
-            Font.custom("Inter-Medium", size: size)
+            return Font.custom("Inter-Medium", size: size)
         case .semiBold:
-            Font.custom("Inter-SemiBold", size: size)
+            return Font.custom("Inter-SemiBold", size: size)
         case .bold:
-            Font.custom("Inter-Bold", size: size)
+            return Font.custom("Inter-Bold", size: size)
         case .black:
-            Font.custom("Inter-Black", size: size)
+            return Font.custom("Inter-Black", size: size)
         }
     }
 }
