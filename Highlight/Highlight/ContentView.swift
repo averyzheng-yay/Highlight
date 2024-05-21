@@ -18,18 +18,24 @@ struct ContentView: View {
                 
                 List {
                     ForEach(viewModel.entries) { entry in
-                        HStack {
-                            Image(uiImage: entry.image)
-                                .resizable()
-                                .frame(width: 50, height: 50)
-                                .clipShape(Circle())
-                            VStack(alignment: .leading) {
-                                Text(entry.title)
-                                    .customFont(.regular, 18)
-                                Text(entry.date, style: .date)
-                                    .customFont(.regular, 14)
-                                    .foregroundColor(.gray)
+                        if let photoEntry = entry as? PhotoEntries {
+                            HStack {
+                                Image(uiImage: entry.image)
+                                    .resizable()
+                                    .frame(width: 50, height: 50)
+                                    .clipShape(Circle())
+                                VStack(alignment: .leading) {
+                                    Text(entry.title)
+                                        .customFont(.regular, 18)
+                                    Text(entry.date, style: .date)
+                                        .customFont(.regular, 14)
+                                        .foregroundColor(.gray)
+                                }
                             }
+                        } else if let textEntry = entry as? TextEntries {
+                            Text("temp")
+                        } else {
+                            Text("Unknown entry type")
                         }
                     }
                 }

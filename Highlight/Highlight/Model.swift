@@ -34,16 +34,34 @@ Users:
 
 import SwiftUI
 
-struct PhotoEntry: Identifiable {
+class Entries: Identifiable {
     var id = UUID()
     var title: String
-    var image: UIImage
     var date: Date
+    
+    init(title: String, date: Date) {
+        self.title = title
+        self.date = date
+    }
 }
 
+class PhotoEntries: Entries, ObservableObject {
+    var image: UIImage
+    
+    init(title: String, image: UIImage, date: Date) {
+        self.image = image
+        super.init(title: title, date: date)
+    }
+}
 
-
-
+class TextEntries: Entries, ObservableObject {
+    var text: String
+    
+    init(title: String, text: String, date: Date) {
+        self.text = text
+        super.init(title: title, date: date)
+    }
+}
 
 
 
