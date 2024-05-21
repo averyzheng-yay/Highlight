@@ -5,7 +5,7 @@ struct AddEntryView: View {
     @State private var title: String = ""
     @State private var image: UIImage? = nil
     @State private var showingImagePicker = false
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         NavigationView {
@@ -44,7 +44,7 @@ struct AddEntryView: View {
                 Button(action: {
                     if let image = image {
                         viewModel.addEntry(title: title, image: image)
-                        dismiss()
+                        self.presentationMode.wrappedValue.dismiss()
                     }
                 }) {
                     Text("Add Entry")
@@ -62,7 +62,7 @@ struct AddEntryView: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
-                        dismiss()
+                        self.presentationMode.wrappedValue.dismiss()
                     }
                 }
             }
