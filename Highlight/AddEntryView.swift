@@ -4,6 +4,7 @@ import SwiftUI
 struct AddEntryView: View {
     @ObservedObject var viewModel: PhotoJournalViewModel
     @State private var title: String = ""
+    @State private var text: String = ""
     @State private var image: UIImage? = nil
     @State private var showingImagePicker = false
     @Environment(\.presentationMode) var presentationMode
