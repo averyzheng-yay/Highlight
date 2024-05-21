@@ -73,7 +73,11 @@ struct AddEntryView: View {
 
 struct AddEntryView_Previews: PreviewProvider {
     static var previews: some View {
-        AddEntryView(viewModel: PhotoJournalViewModel())
+        if #available(iOS 15.0, *) {
+            AddEntryView(viewModel: PhotoJournalViewModel())
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }
 
