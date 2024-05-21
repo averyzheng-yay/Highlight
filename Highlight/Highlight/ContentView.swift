@@ -20,7 +20,7 @@ struct ContentView: View {
                     ForEach(viewModel.entries) { entry in
                         if let photoEntry = entry as? PhotoEntries {
                             HStack {
-                                Image(uiImage: entry.image)
+                                Image(uiImage: photoEntry.image)
                                     .resizable()
                                     .frame(width: 50, height: 50)
                                     .clipShape(Circle())
@@ -66,6 +66,8 @@ extension View {
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }

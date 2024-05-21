@@ -70,7 +70,11 @@ struct AddEntryView: View {
     }
 }
 
-#Preview {
-    AddEntryView(viewModel: PhotoJournalViewModel())
+struct AddEntryView_Previews: PreviewProvider {
+    static var previews: some View {
+        AddEntryView(viewModel: PhotoJournalViewModel())
+    }
 }
+
+
 
