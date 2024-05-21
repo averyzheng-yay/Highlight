@@ -30,7 +30,16 @@ Users:
  This should be most of the objects we will work with. Other methods and front-end stuff would determine how memories/agenda/calendar/etc. works. Let’s try to make use of existing libraries and not “reinvent the wheel” this time.
 */
 
-import Foundation
+// PhotoEntry.swift
+
+import SwiftUI
+
+struct PhotoEntry: Identifiable {
+    var id = UUID()
+    var title: String
+    var image: UIImage
+    var date: Date
+}
 
 
 
