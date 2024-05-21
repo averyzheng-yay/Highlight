@@ -13,10 +13,9 @@ import Foundation
 
 class PhotoEntries: Entry {
     var Photo: Photo
-    var Date: Date
-    var Description: String
     
     init(Photo: Photo, Date: Date, Description: String) {
+        self.Photo = Photo
         super.init(Date: Date, Description: Description)
     }
     

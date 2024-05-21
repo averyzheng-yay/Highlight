@@ -14,6 +14,7 @@
 		3F47576E2BFBB74200ADF2E9 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F47576D2BFBB74200ADF2E9 /* Data.swift */; };
 		3F4757702BFBB86E00ADF2E9 /* PhotoEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F47576F2BFBB86E00ADF2E9 /* PhotoEntries.swift */; };
 		3F4757722BFBB8A500ADF2E9 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4757712BFBB8A500ADF2E9 /* Photo.swift */; };
+		BB157AF72BFC23CF00D7644C /* JournalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB157AF62BFC23CF00D7644C /* JournalModel.swift */; };
 		BB65FA592BFBBA6C007BA2B7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB65FA582BFBBA6C007BA2B7 /* User.swift */; };
 		BB65FA5B2BFBBB13007BA2B7 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB65FA5A2BFBBB13007BA2B7 /* Entry.swift */; };
 /* End PBXBuildFile section */
@@ -27,6 +28,7 @@
 		3F47576D2BFBB74200ADF2E9 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		3F47576F2BFBB86E00ADF2E9 /* PhotoEntries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEntries.swift; sourceTree = "<group>"; };
 		3F4757712BFBB8A500ADF2E9 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		BB157AF62BFC23CF00D7644C /* JournalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalModel.swift; sourceTree = "<group>"; };
 		BB65FA582BFBBA6C007BA2B7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BB65FA5A2BFBBB13007BA2B7 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,6 +66,7 @@
 				2EBF28C92BF7DF55008C7C75 /* HighlightApp.swift */,
 				3F47576D2BFBB74200ADF2E9 /* Data.swift */,
 				3F47576F2BFBB86E00ADF2E9 /* PhotoEntries.swift */,
+				BB157AF62BFC23CF00D7644C /* JournalModel.swift */,
 				BB65FA5A2BFBBB13007BA2B7 /* Entry.swift */,
 				BB65FA582BFBBA6C007BA2B7 /* User.swift */,
 				3F4757712BFBB8A500ADF2E9 /* Photo.swift */,
@@ -153,6 +156,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB65FA5B2BFBBB13007BA2B7 /* Entry.swift in Sources */,
+				BB157AF72BFC23CF00D7644C /* JournalModel.swift in Sources */,
 				2EBF28CC2BF7DF55008C7C75 /* ContentView.swift in Sources */,
 				3F4757702BFBB86E00ADF2E9 /* PhotoEntries.swift in Sources */,
 				BB65FA592BFBBA6C007BA2B7 /* User.swift in Sources */,
