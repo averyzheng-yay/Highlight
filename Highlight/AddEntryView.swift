@@ -1,5 +1,6 @@
 import SwiftUI
 
+@available(iOS 15.0, *)
 struct AddEntryView: View {
     @ObservedObject var viewModel: PhotoJournalViewModel
     @State private var title: String = ""
