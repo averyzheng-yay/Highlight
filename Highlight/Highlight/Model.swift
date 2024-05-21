@@ -54,6 +54,8 @@ class PhotoEntries: Entries, ObservableObject {
     }
 }
 
+// will change later to a different type of entry - doesn't need to be a text entry
+// just framework for later
 class TextEntries: Entries, ObservableObject {
     var text: String
     

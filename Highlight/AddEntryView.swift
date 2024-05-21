@@ -9,6 +9,8 @@ struct AddEntryView: View {
     @State private var showingImagePicker = false
     @Environment(\.presentationMode) var presentationMode
     
+    //eventually will want an intermediate screen to choose what type of entry you want it to be
+    
     var body: some View {
         NavigationView {
             VStack {

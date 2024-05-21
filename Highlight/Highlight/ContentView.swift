@@ -19,6 +19,7 @@ struct ContentView: View {
                 List {
                     ForEach(viewModel.entries) { entry in
                         if let photoEntry = entry as? PhotoEntries {
+                            //put this into its own view later on
                             HStack {
                                 Image(uiImage: photoEntry.image)
                                     .resizable()
@@ -33,6 +34,7 @@ struct ContentView: View {
                                 }
                             }
                         } else if let textEntry = entry as? TextEntries {
+                            //only a temporary view - change later
                             Text("temp")
                         } else {
                             Text("Unknown entry type")
