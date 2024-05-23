@@ -55,7 +55,7 @@ struct AddEntryView: View {
                         .customFont(.regular, 20)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.green)
+                        .background((title == "" || image == nil) ? Color.gray : Color.green)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                         .padding(.horizontal)
