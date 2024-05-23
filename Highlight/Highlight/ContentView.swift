@@ -11,40 +11,8 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Highlight")
-                    .customFont(.medium, 30)
-                    .padding(.top, 20)
-                
-                List {
-                    ForEach(viewModel.entries) { entry in
-                        NavigationLink(destination: EntryView(ent: entry)) {
-                            InitEntryView(ent: entry)
-                            
-                        }
-                    }
-                }
-                
-                Button(action: { showingAddEntry.toggle() }) {
-                    Text("Add New Entry")
-                        .customFont(.regular, 20)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                        .padding(.horizontal)
-                }
-                .padding(.bottom, 20)
-                .sheet(isPresented: $showingAddEntry) {
-                    if #available(iOS 15.0, *) {
-                        AddEntryView(viewModel: viewModel)
-                    } else {
-                        // Fallback on earlier versions
-                    }
-                }
-            }
-            .navigationTitle("Your Highlights")
+            JournalListView(viewModel: viewModel, showingAddEntry: $showingAddEntry)
+                .tabItem{Label("Journal", systemImage: "book")}
         }
     }
 }
