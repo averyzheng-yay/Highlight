@@ -67,8 +67,16 @@ class TextEntries: Entries, ObservableObject {
     }
 }
 
-
-
-
-
-
+func saveImageAsJPG(_ image: UIImage) -> URL? {
+    guard let data = image.jpegData(compressionQuality: 1.0) else { return nil }
+    
+    let tempURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("collage.jpg")
+    
+    do {
+        try data.write(to: tempURL)
+        return tempURL
+    } catch {
+        print("Error saving image: \(error.localizedDescription)")
+        return nil
+    }
+}

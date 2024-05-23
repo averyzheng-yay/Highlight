@@ -4,6 +4,39 @@
 //
 
 import SwiftUI
+import UIKit
+
+struct ExportCollageView: View {
+    @ObservedObject var viewModel: PhotoJournalViewModel
+    
+    var body: some View {
+        VStack {
+            CollageView(viewModel: viewModel)
+                .padding()
+            Button(action: {
+                exportCollageAsImage()
+            }) {
+                Text("Export Collage as JPG")
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+            }
+        }
+    }
+    
+    private func exportCollageAsImage() {
+        let collageImage = CollageView(viewModel: viewModel).asUIImage()
+        
+        if let imageURL = saveImageAsJPG(collageImage) {
+            let activityViewController = UIActivityViewController(activityItems: [imageURL], applicationActivities: nil)
+            
+            if let rootVC = UIApplication.shared.windows.first?.rootViewController {
+                rootVC.present(activityViewController, animated: true, completion: nil)
+            }
+        }
+    }
+}
 
 struct CollageView: View {
     @ObservedObject var viewModel: PhotoJournalViewModel
@@ -33,12 +66,12 @@ struct CollageGridView: View {
     var body: some View {
         let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
         
-        LazyVGrid(columns: columns, spacing: 10) {
+        LazyVGrid(columns: columns, spacing: 5) {
             ForEach(images, id: \.self) { image in
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 100, height: 100)
+                    .frame(width: 115, height: 115)
                     .clipped()
                     .cornerRadius(8)
             }
