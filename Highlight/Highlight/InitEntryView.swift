@@ -1,23 +1,24 @@
 //
-//  EntryView.swift
+//  InitEntryView.swift
 //  Highlight
 //
 
 import SwiftUI
 
-struct EntryView: View {
+struct InitEntryView: View {
     var ent: Entries
     var body: some View {
         if let photoEntry = ent as? PhotoEntries {
             HStack {
                 Image(uiImage: photoEntry.image)
                     .resizable()
-                    .frame(width: 250, height: 250)
+                    .frame(width: 50, height: 50)
+                    .clipShape(Circle())
                 VStack(alignment: .leading) {
                     Text(photoEntry.title)
-                        .customFont(.regular, 30)
-                    Text(photoEntry.date, style: .date)
                         .customFont(.regular, 18)
+                    Text(photoEntry.date, style: .date)
+                        .customFont(.regular, 14)
                         .foregroundColor(.gray)
                 }
             }
@@ -36,6 +37,3 @@ struct EntryView: View {
     }
 }
 
-//#Preview {
-//    EntryView()
-//}

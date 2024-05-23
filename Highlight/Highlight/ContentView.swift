@@ -18,7 +18,10 @@ struct ContentView: View {
                 
                 List {
                     ForEach(viewModel.entries) { entry in
-                        EntryView(ent: entry)
+                        NavigationLink(destination: EntryView(ent: entry)) {
+                            InitEntryView(ent: entry)
+                            
+                        }
                     }
                 }
                 
