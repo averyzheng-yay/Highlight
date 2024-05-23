@@ -1,5 +1,5 @@
 //
-//  InitEntryView.swift
+//  JournalListView.swift
 //  Highlight
 //
 
