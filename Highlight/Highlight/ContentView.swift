@@ -11,8 +11,12 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            JournalListView(viewModel: viewModel, showingAddEntry: $showingAddEntry)
-                .tabItem{Label("Journal", systemImage: "book")}
+            TabView {
+                JournalListView(viewModel: viewModel, showingAddEntry: $showingAddEntry)
+                    .tabItem{Label("Journal", systemImage: "book")}
+                CollageView(viewModel: viewModel)
+                    .tabItem{Label("Collage", systemImage: "photo.on.rectangle")}
+            }
         }
     }
 }

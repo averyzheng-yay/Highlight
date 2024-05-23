@@ -1,5 +1,5 @@
 //
-//  EntryView.swift
+//  EntryView.swift - declaration of classes
 //  Highlight
 //
 
@@ -52,6 +52,3 @@ struct TextDetailView: View {
         .padding()
     }
 }
-//#Preview {
-//    EntryView()
-//}

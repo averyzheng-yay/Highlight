@@ -24,6 +24,7 @@
 		46EF78E22BFCF1B700064557 /* AddEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EF78E12BFCF1B700064557 /* AddEntryView.swift */; };
 		BB4C4BF42BFED5D3004BAA0F /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4C4BF32BFED5D3004BAA0F /* EntryView.swift */; };
 		BB4C4BF62BFED94F004BAA0F /* InitEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4C4BF52BFED94F004BAA0F /* InitEntryView.swift */; };
+		BB63AFA22BFFAD640017F9AD /* CollageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB63AFA12BFFAD640017F9AD /* CollageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		46EF78E12BFCF1B700064557 /* AddEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddEntryView.swift; path = ../AddEntryView.swift; sourceTree = "<group>"; };
 		BB4C4BF32BFED5D3004BAA0F /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		BB4C4BF52BFED94F004BAA0F /* InitEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitEntryView.swift; sourceTree = "<group>"; };
+		BB63AFA12BFFAD640017F9AD /* CollageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				46EF78DF2BFCF19C00064557 /* ImagePicker.swift */,
 				3F47576D2BFBB74200ADF2E9 /* Model.swift */,
 				46EF78DB2BFCF15D00064557 /* ViewModel.swift */,
+				BB63AFA12BFFAD640017F9AD /* CollageView.swift */,
 				2EBF28CB2BF7DF55008C7C75 /* ContentView.swift */,
 				BB4C4BF32BFED5D3004BAA0F /* EntryView.swift */,
 				BB4C4BF52BFED94F004BAA0F /* InitEntryView.swift */,
@@ -200,6 +203,7 @@
 				46EF78E02BFCF19C00064557 /* ImagePicker.swift in Sources */,
 				2EBF28CA2BF7DF55008C7C75 /* HighlightApp.swift in Sources */,
 				46EF78E22BFCF1B700064557 /* AddEntryView.swift in Sources */,
+				BB63AFA22BFFAD640017F9AD /* CollageView.swift in Sources */,
 				BB4C4BF42BFED5D3004BAA0F /* EntryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
