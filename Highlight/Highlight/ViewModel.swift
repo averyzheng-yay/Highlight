@@ -6,8 +6,8 @@ class PhotoJournalViewModel: ObservableObject {
     @Published var entries: [Entries] = []
     
     // will want to include a text element to photo entries as well
-    func addEntry(title: String, image: UIImage) {
-        let newEntry = PhotoEntries(title: title, image: image, date: Date())
+    func addEntry(title: String, image: UIImage, text: String) {
+        let newEntry = PhotoEntries(title: title, image: image, text: text, date: Date())
         entries.append(newEntry)
     }
     

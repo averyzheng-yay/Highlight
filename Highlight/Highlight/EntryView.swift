@@ -23,13 +23,15 @@ struct PhotoDetailView: View {
 
     var body: some View {
         VStack {
-            Image(uiImage: photoEntry.image)
-                .resizable()
-                .scaledToFit()
             Text(photoEntry.title)
                 .font(.largeTitle)
             Text(photoEntry.date, style: .date)
                 .font(.caption)
+            Image(uiImage: photoEntry.image)
+                .resizable()
+                .scaledToFit()
+            Text(photoEntry.text)
+                .font(.body)
         }
         .padding()
     }
@@ -42,10 +44,10 @@ struct TextDetailView: View {
         VStack {
             Text(textEntry.title)
                 .font(.largeTitle)
-            Text(textEntry.text)
-                .font(.body)
             Text(textEntry.date, style: .date)
                 .font(.caption)
+            Text(textEntry.text)
+                .font(.body)
         }
         .padding()
     }

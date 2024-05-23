@@ -49,7 +49,7 @@ struct AddEntryView: View {
                 
                 Button(action: {
                     if let image = image {
-                        viewModel.addEntry(title: title, image: image)
+                        viewModel.addEntry(title: title, image: image, text: text)
                         self.presentationMode.wrappedValue.dismiss()
                     } else {
                         viewModel.addEntry(title: title, text: text)

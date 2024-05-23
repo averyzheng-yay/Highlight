@@ -47,9 +47,11 @@ class Entries: Identifiable {
 
 class PhotoEntries: Entries, ObservableObject {
     var image: UIImage
+    var text: String
     
-    init(title: String, image: UIImage, date: Date) {
+    init(title: String, image: UIImage, text: String, date: Date) {
         self.image = image
+        self.text = text
         super.init(title: title, date: date)
     }
 }
