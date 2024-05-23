@@ -51,7 +51,6 @@ struct JournalListView: View {
                 ForEach(viewModel.entries) { entry in
                     NavigationLink(destination: EntryView(ent: entry)) {
                         InitEntryView(ent: entry)
-                        
                     }
                 }
             }

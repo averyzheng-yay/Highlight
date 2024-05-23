@@ -11,6 +11,9 @@ struct CollageView: View {
     var body: some View {
         ScrollView {
             VStack {
+                Text("Collage")
+                    .customFont(.medium, 30)
+                    .padding(.top, 20)
                 if viewModel.allPhotos.isEmpty {
                     Text("No photos available")
                         .foregroundColor(.gray)
