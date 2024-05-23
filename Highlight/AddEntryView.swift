@@ -45,9 +45,14 @@ struct AddEntryView: View {
                         .padding()
                 }
                 
+                TextEditor(text: $text)
+                
                 Button(action: {
                     if let image = image {
                         viewModel.addEntry(title: title, image: image)
+                        self.presentationMode.wrappedValue.dismiss()
+                    } else {
+                        viewModel.addEntry(title: title, text: text)
                         self.presentationMode.wrappedValue.dismiss()
                     }
                 }) {
@@ -55,12 +60,12 @@ struct AddEntryView: View {
                         .customFont(.regular, 20)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background((title == "" || image == nil) ? Color.gray : Color.green)
+                        .background((title.isEmpty) ? Color.gray : Color.green)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                         .padding(.horizontal)
                 }
-                .disabled(title.isEmpty || image == nil)
+                .disabled(title.isEmpty)
             }
             .navigationTitle("New Entry")
             .toolbar {
