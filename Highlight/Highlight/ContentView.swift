@@ -18,27 +18,7 @@ struct ContentView: View {
                 
                 List {
                     ForEach(viewModel.entries) { entry in
-                        if let photoEntry = entry as? PhotoEntries {
-                            //put this into its own view later on
-                            HStack {
-                                Image(uiImage: photoEntry.image)
-                                    .resizable()
-                                    .frame(width: 50, height: 50)
-                                    .clipShape(Circle())
-                                VStack(alignment: .leading) {
-                                    Text(entry.title)
-                                        .customFont(.regular, 18)
-                                    Text(entry.date, style: .date)
-                                        .customFont(.regular, 14)
-                                        .foregroundColor(.gray)
-                                }
-                            }
-                        } else if let textEntry = entry as? TextEntries {
-                            //only a temporary view - change later
-                            Text("temp")
-                        } else {
-                            Text("Unknown entry type")
-                        }
+                        EntryView(ent: entry)
                     }
                 }
                 

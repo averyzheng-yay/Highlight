@@ -22,6 +22,7 @@
 		46EF78DC2BFCF15D00064557 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EF78DB2BFCF15D00064557 /* ViewModel.swift */; };
 		46EF78E02BFCF19C00064557 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EF78DF2BFCF19C00064557 /* ImagePicker.swift */; };
 		46EF78E22BFCF1B700064557 /* AddEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EF78E12BFCF1B700064557 /* AddEntryView.swift */; };
+		BB4C4BF42BFED5D3004BAA0F /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB4C4BF32BFED5D3004BAA0F /* EntryView.swift */; };
 		BB65FA592BFBBA6C007BA2B7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB65FA582BFBBA6C007BA2B7 /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		46EF78DB2BFCF15D00064557 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		46EF78DF2BFCF19C00064557 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		46EF78E12BFCF1B700064557 /* AddEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddEntryView.swift; path = ../AddEntryView.swift; sourceTree = "<group>"; };
+		BB4C4BF32BFED5D3004BAA0F /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		BB65FA582BFBBA6C007BA2B7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,6 +87,7 @@
 				46EF78DB2BFCF15D00064557 /* ViewModel.swift */,
 				BB65FA582BFBBA6C007BA2B7 /* User.swift */,
 				2EBF28CB2BF7DF55008C7C75 /* ContentView.swift */,
+				BB4C4BF32BFED5D3004BAA0F /* EntryView.swift */,
 				2EBF28CD2BF7DF56008C7C75 /* Assets.xcassets */,
 				2EBF28CF2BF7DF56008C7C75 /* Preview Content */,
 			);
@@ -197,6 +200,7 @@
 				46EF78E02BFCF19C00064557 /* ImagePicker.swift in Sources */,
 				2EBF28CA2BF7DF55008C7C75 /* HighlightApp.swift in Sources */,
 				46EF78E22BFCF1B700064557 /* AddEntryView.swift in Sources */,
+				BB4C4BF42BFED5D3004BAA0F /* EntryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
