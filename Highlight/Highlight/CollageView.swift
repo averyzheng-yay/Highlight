@@ -10,19 +10,19 @@ struct ExportCollageView: View {
     @ObservedObject var viewModel: PhotoJournalViewModel
     
     var body: some View {
-        VStack {
-            CollageView(viewModel: viewModel)
-                .padding()
-            Button(action: {
-                exportCollageAsImage()
-            }) {
-                Text("Export Collage as JPG")
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(8)
-            }
-        }
+        NavigationView {
+                    CollageView(viewModel: viewModel)
+                        .navigationTitle("Collage")
+                        .toolbar {
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                Button(action: {
+                                    exportCollageAsImage()
+                                }) {
+                                    Image(systemName: "square.and.arrow.up")
+                                }
+                            }
+                        }
+                }
     }
     
     private func exportCollageAsImage() {
@@ -44,9 +44,6 @@ struct CollageView: View {
     var body: some View {
         ScrollView {
             VStack {
-                Text("Collage")
-                    .customFont(.medium, 30)
-                    .padding(.top, 20)
                 if viewModel.allPhotos.isEmpty {
                     Text("No photos available")
                         .foregroundColor(.gray)
