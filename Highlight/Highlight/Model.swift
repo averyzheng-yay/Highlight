@@ -33,6 +33,7 @@ Users:
 // PhotoEntry.swift
 
 import SwiftUI
+import CoreLocation
 
 class Entries: Identifiable {
     var id = UUID()
@@ -48,10 +49,12 @@ class Entries: Identifiable {
 class PhotoEntries: Entries, ObservableObject {
     var image: UIImage
     var text: String
+    var location: CLLocation?
     
-    init(title: String, image: UIImage, text: String, date: Date) {
+    init(title: String, image: UIImage, text: String, date: Date, location: CLLocation?) {
         self.image = image
         self.text = text
+        self.location = location
         super.init(title: title, date: date)
     }
 }
@@ -78,5 +81,35 @@ func saveImageAsJPG(_ image: UIImage) -> URL? {
     } catch {
         print("Error saving image: \(error.localizedDescription)")
         return nil
+    }
+}
+
+class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    private let locationManager = CLLocationManager()
+    @Published var location: CLLocation?
+
+    override init() {
+        super.init()
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
+    }
+
+    func startUpdatingLocation() {
+        self.locationManager.startUpdatingLocation()
+    }
+
+    func stopUpdatingLocation() {
+        self.locationManager.stopUpdatingLocation()
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let latestLocation = locations.last else { return }
+        self.location = latestLocation
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Failed to get location: \(error.localizedDescription)")
     }
 }

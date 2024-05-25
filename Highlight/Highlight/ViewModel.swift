@@ -4,10 +4,16 @@ import SwiftUI
 
 class PhotoJournalViewModel: ObservableObject {
     @Published var entries: [Entries] = []
+    private let locationManager = LocationManager()
     
     func addEntry(title: String, image: UIImage, text: String) {
-        let newEntry = PhotoEntries(title: title, image: image, text: text, date: Date())
-        entries.append(newEntry)
+        locationManager.startUpdatingLocation()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            let location = self.locationManager.location
+            let newEntry = PhotoEntries(title: title, image: image, text: text, date: Date(), location: location)
+            self.entries.append(newEntry)
+            self.locationManager.stopUpdatingLocation()
+        }
     }
     
     func addEntry(title: String, text: String) {
@@ -16,7 +22,7 @@ class PhotoJournalViewModel: ObservableObject {
     }
     
     var allPhotos: [UIImage] {
-            entries.compactMap { $0 as? PhotoEntries }.map { $0.image }
+        entries.compactMap { $0 as? PhotoEntries }.map { $0.image }
     }
 }
 

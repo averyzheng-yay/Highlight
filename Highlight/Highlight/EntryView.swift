@@ -32,6 +32,13 @@ struct PhotoDetailView: View {
                 .scaledToFit()
             Text(photoEntry.text)
                 .font(.body)
+            if let location = photoEntry.location {
+                Text("Location: \(location.coordinate.latitude), \(location.coordinate.longitude)")
+                    .padding()
+            } else {
+                Text("Location: Unknown")
+                    .padding()
+            }
         }
         .padding()
     }
