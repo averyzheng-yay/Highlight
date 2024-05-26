@@ -39,11 +39,6 @@ struct InitEntryView: View {
     }
 }
 
-//    .listRowBackground(
-//        LinearGradient(gradient: Gradient(colors: [Color(red: 0.98, green: 0.55, blue: 0.68), Color(red: 0.4, green: 0.2, blue: 0.6)]),
-//                       startPoint: .top,
-//                       endPoint: .bottom))
-
 struct JournalListView: View {
     @ObservedObject var viewModel: PhotoJournalViewModel
     @Binding var showingAddEntry: Bool
@@ -51,19 +46,38 @@ struct JournalListView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Text("Highlight")
-                    .customFont(.medium, 30)
-                    .padding(.top, 20)
-                
-                List {
-                    ForEach(viewModel.entries) { entry in
-                        NavigationLink(destination: EntryView(ent: entry)) {
-                            InitEntryView(ent: entry)
-                        }
+                ZStack{
+                    LinearGradient(gradient: Gradient(colors: [Color(red: 0.3, green: 0.5, blue: 1), Color(red: 0.678, green: 0.847, blue: 0.902)]), startPoint: .top, endPoint: .bottom)
+                    .edgesIgnoringSafeArea(.all)
+                    VStack{
+                        Spacer()
+                        Text("Highlight")
+                            .customFont(.medium, 40)
+                            .padding()
                     }
                 }
-                .background(Color.clear) // Make sure the background is clear
+                .frame(maxHeight: 100)
                 
+                if (viewModel.entries.isEmpty){
+                    ZStack{
+                        Color(.systemGray6)
+                        Text("Make an entry")
+                            .customFont(.medium, 30)
+                            .padding()
+                    }
+                }
+                
+                else {
+                    List {
+                        ForEach(viewModel.entries) { entry in
+                            NavigationLink(destination: EntryView(ent: entry)) {
+                                InitEntryView(ent: entry)
+                            }
+                        }
+                    }
+                    .background(Color(.systemGray6))
+                }
+
                 Button(action: { showingAddEntry.toggle() }) {
                     Text("Add New Entry")
                         .customFont(.regular, 20)

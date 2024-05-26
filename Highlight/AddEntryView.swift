@@ -45,7 +45,7 @@ struct AddEntryView: View {
                         .padding()
                 }
                 
-                TextEditor(text: $text)
+                Spacer()
                 
                 Button(action: {
                     if let image = image {
