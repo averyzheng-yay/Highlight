@@ -6,7 +6,7 @@
 import SwiftUI
 import UIKit
 
-struct CollageView: View {
+struct CollageTabView: View {
     @ObservedObject var viewModel: PhotoJournalViewModel
 
     var body: some View {
@@ -30,8 +30,8 @@ struct CollageView: View {
                             Text("No photos available")
                                 .foregroundColor(.gray)
                         } else {
-                            CollageGridView(groupedEntries: viewModel.entries.groupedByDateAndLocation())
-                                .padding()
+                            CollageView(groupedEntries: viewModel.entries.groupedByDateAndLocation())
+                                                    .padding()
                         }
                     }
                 }
@@ -49,7 +49,7 @@ struct CollageView: View {
     }
     
     private func exportCollageAsImage() {
-        let collageImage = CollageView(viewModel: viewModel).asUIImage()
+        let collageImage = CollageTabView(viewModel: viewModel).asUIImage()
         
         if let imageURL = saveImageAsJPG(collageImage) {
             let activityViewController = UIActivityViewController(activityItems: [imageURL], applicationActivities: nil)
@@ -81,9 +81,9 @@ extension Array where Element: Entries {
     }
 }
 
-struct CollageGridView: View {
+struct CollageView: View {
     let groupedEntries: [String: [Entries]]
-    
+
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
@@ -93,22 +93,59 @@ struct CollageGridView: View {
                             Text(key)
                                 .font(.headline)
                                 .padding([.leading, .trailing], 10)
-                            ForEach(entries) { entry in
-                                if let photoEntry = entry as? PhotoEntries {
-                                    Image(uiImage: photoEntry.image)
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(height: 150)
-                                        .clipped()
-                                        .cornerRadius(8)
-                                        .padding([.leading, .trailing], 10)
-                                }
-                            }
+                            
+                            CollageLayout(entries: entries)
+                                .padding([.leading, .trailing], 10)
                         }
                     }
                 }
             }
         }
+    }
+}
+
+struct CollageLayout: View {
+    let entries: [Entries]
+
+    var body: some View {
+        GeometryReader { geometry in
+                ZStack {
+                    let gridItems = Int(sqrt(Double(entries.count)).rounded(.up))
+                    let itemSize = CGSize(width: geometry.size.width / CGFloat(gridItems),
+                                          height: geometry.size.height / CGFloat(gridItems))
+                    
+                    ForEach(0..<entries.count, id: \.self) { index in
+                        let row = index / gridItems
+                        let col = index % gridItems
+                        let xOffset = CGFloat(col) * itemSize.width
+                        let yOffset = CGFloat(row) * itemSize.height
+                        
+                        if let photoEntry = entries[index] as? PhotoEntries {
+                            Image(uiImage: photoEntry.image)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: itemSize.width * 1.1, height: itemSize.height * 1.1)
+                                .clipped()
+                                .position(x: xOffset + itemSize.width / 2,
+                                          y: yOffset + itemSize.height / 2)
+                                .offset(x: CGFloat.random(in: -10...10),
+                                        y: CGFloat.random(in: -10...10))
+                                .rotationEffect(.degrees(Double.random(in: -5...5)))
+                        } else if let textEntry = entries[index] as? TextEntries {
+                            Text(textEntry.text)
+                                .frame(width: itemSize.width * 1.1, height: itemSize.height * 1.1)
+                                .background(Color.gray.opacity(0.2))
+                                .cornerRadius(8)
+                                .position(x: xOffset + itemSize.width / 2,
+                                          y: yOffset + itemSize.height / 2)
+                                .offset(x: CGFloat.random(in: -10...10),
+                                        y: CGFloat.random(in: -10...10))
+                                .rotationEffect(.degrees(Double.random(in: -5...5)))
+                        }
+                    }
+                }
+            }
+            .frame(height: 300)
     }
 }
 
