@@ -42,7 +42,7 @@ struct ContentView: View {
             TabView {
                 JournalListView(viewModel: viewModel, showingAddEntry: $showingAddEntry)
                     .tabItem{Label("Journal", systemImage: "book")}
-                ExportCollageView(viewModel: viewModel)
+                CollageView(viewModel: viewModel)
                     .tabItem{Label("Collage", systemImage: "photo.on.rectangle")}
             }
         }

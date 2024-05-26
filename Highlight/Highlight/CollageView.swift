@@ -13,6 +13,8 @@ struct CollageView: View {
         NavigationView{
             VStack{
                 ZStack{
+                    LinearGradient(gradient: Gradient(colors: [Color(red: 0.3, green: 0.5, blue: 1), Color(red: 0.678, green: 0.847, blue: 0.902)]), startPoint: .top, endPoint: .bottom)
+                    .edgesIgnoringSafeArea(.all)
                     VStack{
                         Spacer()
                         Text("Collage")
@@ -34,8 +36,30 @@ struct CollageView: View {
                     }
                 }
             }
+            .toolbar {
+                ToolbarItem(placement: .bottomBar) {
+                    Button(action: {
+                        exportCollageAsImage()
+                    }) {
+                        Image(systemName: "square.and.arrow.up")
+                    }
+                }
+            }
         }
     }
+    
+    private func exportCollageAsImage() {
+        let collageImage = CollageView(viewModel: viewModel).asUIImage()
+        
+        if let imageURL = saveImageAsJPG(collageImage) {
+            let activityViewController = UIActivityViewController(activityItems: [imageURL], applicationActivities: nil)
+            
+            if let rootVC = UIApplication.shared.windows.first?.rootViewController {
+                rootVC.present(activityViewController, animated: true, completion: nil)
+            }
+        }
+    }
+    
 }
 
 extension Array where Element: Entries {
