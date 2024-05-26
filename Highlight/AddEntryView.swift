@@ -14,7 +14,11 @@ struct AddEntryView: View {
     var body: some View {
         NavigationView {
             VStack {
+                Text("New Entry")
+                    .customFont(.semibold, 34)
+                    .padding()
                 TextField("Title", text: $title)
+                    .customFont(.regular, 20)
                     .padding()
                     .background(Color(.systemGray6))
                     .cornerRadius(10)
@@ -67,7 +71,6 @@ struct AddEntryView: View {
                 }
                 .disabled(title.isEmpty)
             }
-            .navigationTitle("New Entry")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") {
