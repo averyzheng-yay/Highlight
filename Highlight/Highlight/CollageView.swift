@@ -17,8 +17,8 @@ struct CollageTabView: View {
                     .edgesIgnoringSafeArea(.all)
                     VStack{
                         Spacer()
-                        Text("Collage")
-                            .customFont(.medium, 40)
+                        Text("Last Month's Collage")
+                            .customFont(.medium, 35)
                             .padding()
                     }
                 }
