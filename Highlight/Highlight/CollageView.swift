@@ -38,6 +38,25 @@ struct CollageView: View {
     }
 }
 
+extension Array where Element: Entries {
+    func groupedByDateAndLocation() -> [String: [Entries]] {
+        var groupedEntries: [String: [Entries]] = [:]
+        
+        for entry in self {
+            let date = DateFormatter.localizedString(from: entry.date, dateStyle: .short, timeStyle: .none)
+            let location = entry.location != nil ? "\(entry.location!.coordinate.latitude),\(entry.location!.coordinate.longitude)" : "Unknown Location"
+            let key = "\(date) - \(location)"
+            
+            if groupedEntries[key] == nil {
+                groupedEntries[key] = []
+            }
+            groupedEntries[key]?.append(entry)
+        }
+        
+        return groupedEntries
+    }
+}
+
 struct CollageGridView: View {
     let images: [UIImage]
 

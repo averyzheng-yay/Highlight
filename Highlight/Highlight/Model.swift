@@ -39,23 +39,23 @@ class Entries: Identifiable {
     var id = UUID()
     var title: String
     var date: Date
+    var location: CLLocation?
     
-    init(title: String, date: Date) {
+    init(title: String, date: Date, location: CLLocation?) {
         self.title = title
         self.date = date
+        self.location = location
     }
 }
 
 class PhotoEntries: Entries, ObservableObject {
     var image: UIImage
     var text: String
-    var location: CLLocation?
     
     init(title: String, image: UIImage, text: String, date: Date, location: CLLocation?) {
         self.image = image
         self.text = text
-        self.location = location
-        super.init(title: title, date: date)
+        super.init(title: title, date: date, location: location)
     }
 }
 
@@ -66,7 +66,7 @@ class TextEntries: Entries, ObservableObject {
     
     init(title: String, text: String, date: Date) {
         self.text = text
-        super.init(title: title, date: date)
+        super.init(title: title, date: date, location: location)
     }
 }
 
