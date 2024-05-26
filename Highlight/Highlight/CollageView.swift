@@ -28,7 +28,7 @@ struct CollageView: View {
                             Text("No photos available")
                                 .foregroundColor(.gray)
                         } else {
-                            CollageGridView(images: viewModel.allPhotos)
+                            CollageGridView(groupedEntries: viewModel.entries.groupedByDateAndLocation())
                                 .padding()
                         }
                     }
@@ -58,19 +58,31 @@ extension Array where Element: Entries {
 }
 
 struct CollageGridView: View {
-    let images: [UIImage]
-
+    let groupedEntries: [String: [Entries]]
+    
     var body: some View {
-        let columns: [GridItem] = Array(repeating: .init(.flexible()), count: 3)
-        
-        LazyVGrid(columns: columns, spacing: 5) {
-            ForEach(images, id: \.self) { image in
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 115, height: 115)
-                    .clipped()
-                    .cornerRadius(8)
+        ScrollView {
+            VStack(spacing: 20) {
+                ForEach(groupedEntries.keys.sorted(), id: \.self) { key in
+                    if let entries = groupedEntries[key] {
+                        VStack(alignment: .leading) {
+                            Text(key)
+                                .font(.headline)
+                                .padding([.leading, .trailing], 10)
+                            ForEach(entries) { entry in
+                                if let photoEntry = entry as? PhotoEntries {
+                                    Image(uiImage: photoEntry.image)
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(height: 150)
+                                        .clipped()
+                                        .cornerRadius(8)
+                                        .padding([.leading, .trailing], 10)
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

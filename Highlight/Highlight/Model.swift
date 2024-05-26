@@ -64,7 +64,7 @@ class PhotoEntries: Entries, ObservableObject {
 class TextEntries: Entries, ObservableObject {
     var text: String
     
-    init(title: String, text: String, date: Date) {
+    init(title: String, text: String, date: Date, location: CLLocation?) {
         self.text = text
         super.init(title: title, date: date, location: location)
     }
