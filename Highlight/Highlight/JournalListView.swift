@@ -79,3 +79,6 @@ struct JournalListView: View {
         .navigationTitle("Your Highlights")
     }
 }
+
+
+
