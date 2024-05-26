@@ -63,22 +63,29 @@ struct CollageTabView: View {
 }
 
 extension Array where Element: Entries {
-    func groupedByDateAndLocation() -> [String: [Entries]] {
-        var groupedEntries: [String: [Entries]] = [:]
-        
-        for entry in self {
-            let date = DateFormatter.localizedString(from: entry.date, dateStyle: .short, timeStyle: .none)
-            let location = entry.location != nil ? "\(entry.location!.coordinate.latitude),\(entry.location!.coordinate.longitude)" : "Unknown Location"
-            let key = "\(date) - \(location)"
+    func groupedByDateAndLocation(fromLastMonth: Bool = true) -> [String: [Entries]] {
+            var groupedEntries: [String: [Entries]] = [:]
             
-            if groupedEntries[key] == nil {
-                groupedEntries[key] = []
+            let calendar = Calendar.current
+            let now = Date()
+            let lastMonth = calendar.date(byAdding: .month, value: -1, to: now)!
+            
+            for entry in self {
+                // Check if the entry is within the last month
+                if !fromLastMonth || calendar.compare(entry.date, to: lastMonth, toGranularity: .month) == .orderedDescending {
+                    let date = DateFormatter.localizedString(from: entry.date, dateStyle: .short, timeStyle: .none)
+                    let location = entry.location != nil ? "\(entry.location!.coordinate.latitude),\(entry.location!.coordinate.longitude)" : "Unknown Location"
+                    let key = "\(date) - \(location)"
+                    
+                    if groupedEntries[key] == nil {
+                        groupedEntries[key] = []
+                    }
+                    groupedEntries[key]?.append(entry)
+                }
             }
-            groupedEntries[key]?.append(entry)
+            
+            return groupedEntries
         }
-        
-        return groupedEntries
-    }
 }
 
 struct CollageView: View {
@@ -90,10 +97,6 @@ struct CollageView: View {
                 ForEach(groupedEntries.keys.sorted(), id: \.self) { key in
                     if let entries = groupedEntries[key] {
                         VStack(alignment: .leading) {
-                            Text(key)
-                                .font(.headline)
-                                .padding([.leading, .trailing], 10)
-                            
                             CollageLayout(entries: entries)
                                 .padding([.leading, .trailing], 10)
                         }
@@ -109,43 +112,43 @@ struct CollageLayout: View {
 
     var body: some View {
         GeometryReader { geometry in
-                ZStack {
-                    let gridItems = Int(sqrt(Double(entries.count)).rounded(.up))
-                    let itemSize = CGSize(width: geometry.size.width / CGFloat(gridItems),
-                                          height: geometry.size.height / CGFloat(gridItems))
+            ZStack {
+                let gridItems = Int(sqrt(Double(entries.count)).rounded(.up))
+                let itemSize = CGSize(width: geometry.size.width / CGFloat(gridItems),
+                                      height: geometry.size.height / CGFloat(gridItems))
+                
+                ForEach(0..<entries.count, id: \.self) { index in
+                    let row = index / gridItems
+                    let col = index % gridItems
+                    let xOffset = CGFloat(col) * itemSize.width
+                    let yOffset = CGFloat(row) * itemSize.height
                     
-                    ForEach(0..<entries.count, id: \.self) { index in
-                        let row = index / gridItems
-                        let col = index % gridItems
-                        let xOffset = CGFloat(col) * itemSize.width
-                        let yOffset = CGFloat(row) * itemSize.height
-                        
-                        if let photoEntry = entries[index] as? PhotoEntries {
-                            Image(uiImage: photoEntry.image)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: itemSize.width * 1.1, height: itemSize.height * 1.1)
-                                .clipped()
-                                .position(x: xOffset + itemSize.width / 2,
-                                          y: yOffset + itemSize.height / 2)
-                                .offset(x: CGFloat.random(in: -10...10),
-                                        y: CGFloat.random(in: -10...10))
-                                .rotationEffect(.degrees(Double.random(in: -5...5)))
-                        } else if let textEntry = entries[index] as? TextEntries {
-                            Text(textEntry.text)
-                                .frame(width: itemSize.width * 1.1, height: itemSize.height * 1.1)
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(8)
-                                .position(x: xOffset + itemSize.width / 2,
-                                          y: yOffset + itemSize.height / 2)
-                                .offset(x: CGFloat.random(in: -10...10),
-                                        y: CGFloat.random(in: -10...10))
-                                .rotationEffect(.degrees(Double.random(in: -5...5)))
-                        }
+                    if let photoEntry = entries[index] as? PhotoEntries {
+                        Image(uiImage: photoEntry.image)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: itemSize.width * 1.1, height: itemSize.height * 1.1)
+                            .clipped()
+                            .position(x: xOffset + itemSize.width / 2,
+                                      y: yOffset + itemSize.height / 2)
+                            .offset(x: CGFloat.random(in: -10...10),
+                                    y: CGFloat.random(in: -10...10))
+                            .rotationEffect(.degrees(Double.random(in: -7...7)))
+                    } else if let textEntry = entries[index] as? TextEntries {
+                        Text(textEntry.text)
+                            .frame(width: itemSize.width * 1.1, height: itemSize.height * 1.1)
+                            .background(Color.gray.opacity(0.2))
+                            .cornerRadius(8)
+                            .position(x: xOffset + itemSize.width / 2,
+                                      y: yOffset + itemSize.height / 2)
+                            .offset(x: CGFloat.random(in: -10...10),
+                                    y: CGFloat.random(in: -10...10))
+                            .rotationEffect(.degrees(Double.random(in: -7...7)))
                     }
                 }
             }
-            .frame(height: 300)
+        }
+        .frame(height: 300)
     }
 }
 
