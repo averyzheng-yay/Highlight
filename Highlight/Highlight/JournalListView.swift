@@ -8,34 +8,41 @@ import SwiftUI
 struct InitEntryView: View {
     var ent: Entries
     var body: some View {
-        if let photoEntry = ent as? PhotoEntries {
-            HStack {
-                Image(uiImage: photoEntry.image)
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .clipShape(Circle())
+        VStack{
+            if let photoEntry = ent as? PhotoEntries {
+                HStack {
+                    Image(uiImage: photoEntry.image)
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                    VStack(alignment: .leading) {
+                        Text(photoEntry.title)
+                            .customFont(.regular, 18)
+                        Text(photoEntry.date, style: .date)
+                            .customFont(.regular, 14)
+                            .foregroundColor(.gray)
+                    }
+                }
+            } else if let textEntry = ent as? TextEntries {
+                // only a temporary view - change later (eventually completely change textEntries to a different type)
                 VStack(alignment: .leading) {
-                    Text(photoEntry.title)
+                    Text(textEntry.title)
                         .customFont(.regular, 18)
-                    Text(photoEntry.date, style: .date)
+                    Text(textEntry.date, style: .date)
                         .customFont(.regular, 14)
                         .foregroundColor(.gray)
                 }
+            } else {
+                Text("Unknown entry type")
             }
-        } else if let textEntry = ent as? TextEntries {
-            // only a temporary view - change later (eventually completely change textEntries to a different type)
-            VStack(alignment: .leading) {
-                Text(textEntry.title)
-                    .customFont(.regular, 18)
-                Text(textEntry.date, style: .date)
-                    .customFont(.regular, 14)
-                    .foregroundColor(.gray)
-            }
-        } else {
-            Text("Unknown entry type")
         }
     }
 }
+
+//    .listRowBackground(
+//        LinearGradient(gradient: Gradient(colors: [Color(red: 0.98, green: 0.55, blue: 0.68), Color(red: 0.4, green: 0.2, blue: 0.6)]),
+//                       startPoint: .top,
+//                       endPoint: .bottom))
 
 struct JournalListView: View {
     @ObservedObject var viewModel: PhotoJournalViewModel
@@ -55,6 +62,7 @@ struct JournalListView: View {
                         }
                     }
                 }
+                .background(Color.clear) // Make sure the background is clear
                 
                 Button(action: { showingAddEntry.toggle() }) {
                     Text("Add New Entry")
