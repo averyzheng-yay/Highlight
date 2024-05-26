@@ -6,7 +6,6 @@
 import SwiftUI
 import UIKit
 
-
 struct CollageView: View {
     @ObservedObject var viewModel: PhotoJournalViewModel
 
@@ -14,8 +13,6 @@ struct CollageView: View {
         NavigationView{
             VStack{
                 ZStack{
-                    LinearGradient(gradient: Gradient(colors: [Color(red: 0.3, green: 0.5, blue: 1), Color(red: 0.678, green: 0.847, blue: 0.902)]), startPoint: .top, endPoint: .bottom)
-                        .edgesIgnoringSafeArea(.all)
                     VStack{
                         Spacer()
                         Text("Collage")
