@@ -6,54 +6,38 @@
 import SwiftUI
 import UIKit
 
-struct ExportCollageView: View {
-    @ObservedObject var viewModel: PhotoJournalViewModel
-    
-    var body: some View {
-        NavigationView {
-                    CollageView(viewModel: viewModel)
-                        .navigationTitle("Collage")
-                        .toolbar {
-                            ToolbarItem(placement: .navigationBarTrailing) {
-                                Button(action: {
-                                    exportCollageAsImage()
-                                }) {
-                                    Image(systemName: "square.and.arrow.up")
-                                }
-                            }
-                        }
-                }
-    }
-    
-    private func exportCollageAsImage() {
-        let collageImage = CollageView(viewModel: viewModel).asUIImage()
-        
-        if let imageURL = saveImageAsJPG(collageImage) {
-            let activityViewController = UIActivityViewController(activityItems: [imageURL], applicationActivities: nil)
-            
-            if let rootVC = UIApplication.shared.windows.first?.rootViewController {
-                rootVC.present(activityViewController, animated: true, completion: nil)
-            }
-        }
-    }
-}
 
 struct CollageView: View {
     @ObservedObject var viewModel: PhotoJournalViewModel
 
     var body: some View {
-        ScrollView {
-            VStack {
-                if viewModel.allPhotos.isEmpty {
-                    Text("No photos available")
-                        .foregroundColor(.gray)
-                } else {
-                    CollageGridView(images: viewModel.allPhotos)
-                        .padding()
+        NavigationView{
+            VStack{
+                ZStack{
+                    LinearGradient(gradient: Gradient(colors: [Color(red: 0.3, green: 0.5, blue: 1), Color(red: 0.678, green: 0.847, blue: 0.902)]), startPoint: .top, endPoint: .bottom)
+                        .edgesIgnoringSafeArea(.all)
+                    VStack{
+                        Spacer()
+                        Text("Collage")
+                            .customFont(.medium, 40)
+                            .padding()
+                    }
+                }
+                .frame(maxHeight: 100)
+                
+                ScrollView {
+                    VStack {
+                        if viewModel.allPhotos.isEmpty {
+                            Text("No photos available")
+                                .foregroundColor(.gray)
+                        } else {
+                            CollageGridView(images: viewModel.allPhotos)
+                                .padding()
+                        }
+                    }
                 }
             }
         }
-        .navigationTitle("Collage")
     }
 }
 
