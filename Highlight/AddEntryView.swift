@@ -49,7 +49,9 @@ struct AddEntryView: View {
                         .padding()
                 }
                 
-                Spacer()
+                TextEditor(text: $text)
+                    .frame(height: 200)
+                
                 
                 Button(action: {
                     if let image = image {
@@ -64,7 +66,7 @@ struct AddEntryView: View {
                         .customFont(.regular, 20)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background((title.isEmpty) ? Color.gray : Color.green)
+                        .background((title.isEmpty) ? Color.gray : Color.blue)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                         .padding(.horizontal)
