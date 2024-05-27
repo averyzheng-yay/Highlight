@@ -27,9 +27,12 @@ struct CollageTabView: View {
                 ScrollView {
                     VStack {
                         if viewModel.allPhotos.isEmpty {
-                            Text("No photos available")
-                                .customFont(.light, 30)
-                                .foregroundColor(.gray)
+                            VStack{
+                                Spacer()
+                                Text("No photos available")
+                                    .customFont(.light, 30)
+                                    .foregroundColor(.gray)
+                            }
                         } else {
                             CollageView(groupedEntries: viewModel.entries.groupedByDateAndLocation())
                                 .padding()

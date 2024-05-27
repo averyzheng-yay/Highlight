@@ -56,20 +56,15 @@ struct AddEntryView: View {
                 
                 ZStack {
                     Color(.systemGray6)
+                    VStack{
+                    Spacer()
+                    Text("Optional Description Below")
+                        .customFont(.light, 20)
                     TextEditor(text: $text)
-                        .background(Color(.systemGray6))
+                        .background(Color(.clear))
                         .padding(4) // Add padding inside the TextEditor to avoid text touching the edges
-                    if (text.isEmpty) {
-                        VStack{
-                            HStack{
-                                Text("Description Here")
-                                    .customFont(.medium, 40)
-                                    .padding()
-                                Spacer()
-                            }
-                            Spacer()
-                        }
                     }
+                    
                 }
                 .frame(maxWidth: .infinity)
                 .frame(height: 200)
