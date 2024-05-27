@@ -54,11 +54,21 @@ struct AddEntryView: View {
                 }
                 
                 ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(Color(.systemGray6))
+                    Color(.systemGray6)
                     TextEditor(text: $text)
                         .background(Color(.systemGray6))
                         .padding(4) // Add padding inside the TextEditor to avoid text touching the edges
+                    if (text.isEmpty) {
+                        VStack{
+                            HStack{
+                                Text("Description Here")
+                                    .customFont(.medium, 40)
+                                    .padding()
+                                Spacer()
+                            }
+                            Spacer()
+                        }
+                    }
                 }
                 .frame(maxWidth: .infinity)
                 .frame(height: 200)
