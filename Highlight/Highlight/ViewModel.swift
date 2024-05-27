@@ -16,11 +16,6 @@ class PhotoJournalViewModel: ObservableObject {
         }
     }
     
-    func addEntry(title: String, text: String) {
-        let newEntry = TextEntries(title: title, text: text, date: Date(), location: nil)
-        entries.insert(newEntry, at:0)
-    }
-    
     var allPhotos: [UIImage] {
         entries.compactMap { $0 as? PhotoEntries }.map { $0.image }
     }
