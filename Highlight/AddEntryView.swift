@@ -41,6 +41,7 @@ struct AddEntryView: View {
                 .sheet(isPresented: $showingImagePicker) {
                     ImagePicker(image: $image)
                 }
+                // Select Image button; shows the ImagePicker view when pressed and stores the image in the image variable
                 
                 Spacer()
                 
