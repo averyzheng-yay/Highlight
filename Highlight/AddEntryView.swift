@@ -57,11 +57,7 @@ struct AddEntryView: View {
                     if let image = image {
                         viewModel.addEntry(title: title, image: image, text: text)
                         self.presentationMode.wrappedValue.dismiss()
-                    } else {
-                        viewModel.addEntry(title: title, text: text)
-                        self.presentationMode.wrappedValue.dismiss()
-                    }
-                }) {
+                    }}) {
                     Text("Add Entry")
                         .customFont(.regular, 20)
                         .padding()
@@ -71,7 +67,7 @@ struct AddEntryView: View {
                         .cornerRadius(10)
                         .padding(.horizontal)
                 }
-                .disabled(title.isEmpty)
+                .disabled(title.isEmpty && image == nil)
             }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
