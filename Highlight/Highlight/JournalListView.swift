@@ -78,7 +78,7 @@ struct JournalListView: View {
         } else {
             return viewModel.entries.filter { entry in
                 let matchesTitleOrDescription = entry.title.localizedCaseInsensitiveContains(searchText) || entry.text.localizedCaseInsensitiveContains(searchText)
-                let matchesDateRange = entry.date >= startDate && entry.date <= endDate
+                let matchesDateRange = entry.date >= startDate && entry.date <= endDate.addingTimeInterval(60*60*24)
                 return matchesTitleOrDescription && matchesDateRange
             }
         }
