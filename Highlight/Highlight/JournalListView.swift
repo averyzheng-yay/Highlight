@@ -69,14 +69,17 @@ struct JournalListView: View {
     @ObservedObject var viewModel: PhotoJournalViewModel
     @Binding var showingAddEntry: Bool
     @State private var searchText = ""
+    @State private var startDate = Date().addingTimeInterval(-60*60*24*30)
+    @State private var endDate = Date()
     
     var filteredEntries: [Entries] {
         if searchText.isEmpty {
             return viewModel.entries
         } else {
             return viewModel.entries.filter { entry in
-                entry.title.localizedCaseInsensitiveContains(searchText) ||
-                entry.text.localizedCaseInsensitiveContains(searchText)
+                let matchesTitleOrDescription = entry.title.localizedCaseInsensitiveContains(searchText) || entry.text.localizedCaseInsensitiveContains(searchText)
+                let matchesDateRange = entry.date >= startDate && entry.date <= endDate
+                return matchesTitleOrDescription && matchesDateRange
             }
         }
     }
@@ -97,7 +100,20 @@ struct JournalListView: View {
                 .frame(maxHeight: 100)
                 
                 SearchBar(text: $searchText)
-                                    .padding()
+                    .padding()
+                
+                if (searchText != "") {
+                    HStack {
+                        DatePicker("From", selection: $startDate, displayedComponents: .date)
+                            .datePickerStyle(CompactDatePickerStyle())
+                        DatePicker("To", selection: $endDate, displayedComponents: .date)
+                            .datePickerStyle(CompactDatePickerStyle())
+                    }
+                    .padding()
+                } else {
+                    EmptyView()
+                }
+                
                 
                 if (viewModel.entries.isEmpty){
                     ZStack{
