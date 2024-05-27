@@ -53,7 +53,7 @@ struct JournalListView: View {
                     ZStack{
                         Color(.systemGray6)
                         VStack{
-                            Text("Make an entry")
+                            Text("Create your first photo entry!")
                                 .customFont(.light, 30)
                                 .padding()
                             Spacer()
