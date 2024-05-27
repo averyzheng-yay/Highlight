@@ -85,12 +85,12 @@ struct AddEntryView: View {
                             .customFont(.regular, 20)
                             .padding()
                             .frame(maxWidth: .infinity)
-                            .background((title.isEmpty) ? Color.gray : Color.blue)
+                            .background((title.isEmpty || image == nil) ? Color.gray : Color.blue)
                             .foregroundColor(.white)
                             .cornerRadius(10)
                             .padding(.horizontal)
                     }
-                    .disabled(title.isEmpty && image == nil)
+                    .disabled(title.isEmpty || image == nil)
             }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
