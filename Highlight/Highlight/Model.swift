@@ -35,11 +35,11 @@ Users:
 import SwiftUI
 import CoreLocation
 
-class Entries: Identifiable {
+class Entries: Identifiable, ObservableObject {
     var id = UUID()
-    var title: String
-    var date: Date
-    var location: CLLocation?
+    @Published var title: String
+    @Published var date: Date
+    @Published var location: CLLocation?
     
     init(title: String, date: Date, location: CLLocation?) {
         self.title = title
@@ -48,9 +48,9 @@ class Entries: Identifiable {
     }
 }
 
-class PhotoEntries: Entries, ObservableObject {
-    var image: UIImage
-    var text: String
+class PhotoEntries: Entries {
+    @Published var image: UIImage
+    @Published var text: String
     
     init(title: String, image: UIImage, text: String, date: Date, location: CLLocation?) {
         self.image = image
