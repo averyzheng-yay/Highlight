@@ -16,6 +16,12 @@ class PhotoJournalViewModel: ObservableObject {
         }
     }
     
+    func removeEntry(entry: Entries) {
+        if let index = entries.firstIndex(where: { $0.id == entry.id }) {
+            entries.remove(at: index)
+        }
+    }
+    
     var allPhotos: [UIImage] {
         entries.compactMap { $0 as? PhotoEntries }.map { $0.image }
     }

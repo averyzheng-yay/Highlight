@@ -59,6 +59,7 @@ struct PhotoDetailView: View {
     }
 }
 
+// View that appears when the entry needs to be edited
 struct EditPhotoEntryView: View {
     @ObservedObject var photoEntry: PhotoEntries
     @Environment(\.presentationMode) var presentationMode
@@ -75,7 +76,7 @@ struct EditPhotoEntryView: View {
             }
 
             Section(header: Text("Image")) {
-                // Implement image picker if needed
+                // Image Picker unnecessary
                 Image(uiImage: photoEntry.image)
                     .resizable()
                     .scaledToFit()

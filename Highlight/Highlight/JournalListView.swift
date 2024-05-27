@@ -132,6 +132,7 @@ struct JournalListView: View {
                                 InitEntryView(ent: entry)
                             }
                         }
+                        .onDelete(perform: deleteEntry)
                     }
                     .background(Color(.systemGray6))
                 }
@@ -157,6 +158,13 @@ struct JournalListView: View {
                     }
                 }
             }
+        }
+    }
+    
+    private func deleteEntry(at offsets: IndexSet) {
+        offsets.forEach { index in
+            let entry = filteredEntries[index]
+            viewModel.removeEntry(entry: entry)
         }
     }
 }
