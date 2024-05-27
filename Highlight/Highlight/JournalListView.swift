@@ -61,9 +61,12 @@ struct JournalListView: View {
                 if (viewModel.entries.isEmpty){
                     ZStack{
                         Color(.systemGray6)
-                        Text("Make an entry")
-                            .customFont(.medium, 30)
-                            .padding()
+                        VStack{
+                            Text("Make an entry")
+                                .customFont(.light, 30)
+                                .padding()
+                            Spacer()
+                        }
                     }
                 }
                 
@@ -78,6 +81,8 @@ struct JournalListView: View {
                     .background(Color(.systemGray6))
                 }
 
+                Spacer(minLength: 20)
+                
                 Button(action: { showingAddEntry.toggle() }) {
                     Text("Add New Entry")
                         .customFont(.regular, 20)
