@@ -38,11 +38,13 @@ import CoreLocation
 class Entries: Identifiable, ObservableObject {
     var id = UUID()
     @Published var title: String
+    @Published var text: String
     @Published var date: Date
     @Published var location: CLLocation?
     
-    init(title: String, date: Date, location: CLLocation?) {
+    init(title: String, text: String, date: Date, location: CLLocation?) {
         self.title = title
+        self.text = text
         self.date = date
         self.location = location
     }
@@ -50,12 +52,10 @@ class Entries: Identifiable, ObservableObject {
 
 class PhotoEntries: Entries {
     @Published var image: UIImage
-    @Published var text: String
     
     init(title: String, image: UIImage, text: String, date: Date, location: CLLocation?) {
         self.image = image
-        self.text = text
-        super.init(title: title, date: date, location: location)
+        super.init(title: title, text: text, date: date, location: location)
     }
 }
 

@@ -30,9 +30,56 @@ struct InitEntryView: View {
     }
 }
 
+struct SearchBar: UIViewRepresentable {
+    @Binding var text: String
+
+    class Coordinator: NSObject, UISearchBarDelegate {
+        @Binding var text: String
+
+        init(text: Binding<String>) {
+            _text = text
+        }
+
+        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            text = searchText
+        }
+
+        func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+            searchBar.resignFirstResponder()
+        }
+    }
+
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(text: $text)
+    }
+
+    func makeUIView(context: UIViewRepresentableContext<SearchBar>) -> UISearchBar {
+        let searchBar = UISearchBar(frame: .zero)
+        searchBar.delegate = context.coordinator
+        return searchBar
+    }
+
+    func updateUIView(_ uiView: UISearchBar, context: UIViewRepresentableContext<SearchBar>) {
+        uiView.text = text
+    }
+}
+
+
 struct JournalListView: View {
     @ObservedObject var viewModel: PhotoJournalViewModel
     @Binding var showingAddEntry: Bool
+    @State private var searchText = ""
+    
+    var filteredEntries: [Entries] {
+        if searchText.isEmpty {
+            return viewModel.entries
+        } else {
+            return viewModel.entries.filter { entry in
+                entry.title.localizedCaseInsensitiveContains(searchText) ||
+                entry.text.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -49,6 +96,9 @@ struct JournalListView: View {
                 }
                 .frame(maxHeight: 100)
                 
+                SearchBar(text: $searchText)
+                                    .padding()
+                
                 if (viewModel.entries.isEmpty){
                     ZStack{
                         Color(.systemGray6)
@@ -59,11 +109,9 @@ struct JournalListView: View {
                             Spacer()
                         }
                     }
-                }
-                
-                else {
+                } else {
                     List {
-                        ForEach(viewModel.entries) { entry in
+                        ForEach(filteredEntries) { entry in
                             NavigationLink(destination: EntryView(ent: entry)) {
                                 InitEntryView(ent: entry)
                             }
