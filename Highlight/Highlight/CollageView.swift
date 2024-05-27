@@ -32,7 +32,7 @@ struct CollageTabView: View {
                                 .foregroundColor(.gray)
                         } else {
                             CollageView(groupedEntries: viewModel.entries.groupedByDateAndLocation())
-                                                    .padding()
+                                .padding()
                         }
                     }
                 }
@@ -50,7 +50,7 @@ struct CollageTabView: View {
     }
     
     private func exportCollageAsImage() {
-        let collageImage = CollageTabView(viewModel: viewModel).asUIImage()
+        let collageImage = CollageView(groupedEntries: viewModel.entries.groupedByDateAndLocation()).asUIImage()
         
         if let imageURL = saveImageAsJPG(collageImage) {
             let activityViewController = UIActivityViewController(activityItems: [imageURL], applicationActivities: nil)
