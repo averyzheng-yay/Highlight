@@ -3,38 +3,12 @@
 //  Highlight
 //
 
-/*“Objects” to work with:
-
-Users:
- - user must log in or sign up, retrieving or creating a “User” object
- - friend relation to other Users
- - has-a relation to Entries and PhotoEntries
- 
- Entries:
- - bullet journal
- - date
- - metadata (location, etc. depending on user’s privacy settings)
- - owned by a User
- 
- PhotoEntries:
- - has-a Photo
- - can be co-owned? by ≥1 Users (Relational database stuff)
- - can have a written description (optional)
- - date
- - possible metadata
- 
- Photo:
- - object abstracting the storage of a photo in database and potential methods for displaying it in SwiftUI
- 
- 
- This should be most of the objects we will work with. Other methods and front-end stuff would determine how memories/agenda/calendar/etc. works. Let’s try to make use of existing libraries and not “reinvent the wheel” this time.
-*/
-
-// PhotoEntry.swift
+// Stores entry-type classes as well as miscellaneous functions and location manager class
 
 import SwiftUI
 import CoreLocation
 
+// General entry class (Parent Class)
 class Entries: Identifiable, ObservableObject {
     var id = UUID()
     @Published var title: String
@@ -50,6 +24,7 @@ class Entries: Identifiable, ObservableObject {
     }
 }
 
+// Entries with photos (Child Class; inherits most variables from Entries)
 class PhotoEntries: Entries {
     @Published var image: UIImage
     
@@ -59,6 +34,7 @@ class PhotoEntries: Entries {
     }
 }
 
+// Function for saving a view as an image; used for the export function in CollageView
 func saveImageAsJPG(_ image: UIImage) -> URL? {
     guard let data = image.jpegData(compressionQuality: 1.0) else { return nil }
     
@@ -73,6 +49,7 @@ func saveImageAsJPG(_ image: UIImage) -> URL? {
     }
 }
 
+// Class for managing the current location of the user
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     @Published var location: CLLocation?
