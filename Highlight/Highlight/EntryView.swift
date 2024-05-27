@@ -24,24 +24,23 @@ struct PhotoDetailView: View {
         VStack {
             Text(photoEntry.title)
                 .font(.largeTitle)
-            Text(photoEntry.date, style: .date)
-                .font(.title)
+                .padding()
             Image(uiImage: photoEntry.image)
                 .resizable()
                 .scaledToFit()
+                .padding()
             if let location = photoEntry.location {
                 Text("Location: \(location.coordinate.latitude), \(location.coordinate.longitude)")
-                    .padding()
                     .font(.caption)
             } else {
                 Text("Location: Unknown")
-                    .padding()
                     .font(.caption)
             }
             Text(photoEntry.text)
                 .font(.body)
         }
         .padding()
+        .navigationTitle("\(photoEntry.date)")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
