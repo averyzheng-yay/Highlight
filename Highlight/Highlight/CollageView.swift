@@ -135,17 +135,7 @@ struct CollageLayout: View {
                             .offset(x: CGFloat.random(in: -10...10),
                                     y: CGFloat.random(in: -10...10))
                             .rotationEffect(.degrees(Double.random(in: -7...7)))
-                    } else if let textEntry = entries[index] as? TextEntries {
-                        Text(textEntry.text)
-                            .frame(width: itemSize.width * 1.1, height: itemSize.height * 1.1)
-                            .background(Color.gray.opacity(0.2))
-                            .cornerRadius(8)
-                            .position(x: xOffset + itemSize.width / 2,
-                                      y: yOffset + itemSize.height / 2)
-                            .offset(x: CGFloat.random(in: -10...10),
-                                    y: CGFloat.random(in: -10...10))
-                            .rotationEffect(.degrees(Double.random(in: -7...7)))
-                    }
+                    } 
                 }
             }
         }
