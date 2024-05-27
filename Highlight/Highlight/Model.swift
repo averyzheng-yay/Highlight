@@ -59,17 +59,6 @@ class PhotoEntries: Entries, ObservableObject {
     }
 }
 
-// will change later to a different type of entry - doesn't need to be a text entry
-// just framework for later
-class TextEntries: Entries, ObservableObject {
-    var text: String
-    
-    init(title: String, text: String, date: Date, location: CLLocation?) {
-        self.text = text
-        super.init(title: title, date: date, location: location)
-    }
-}
-
 func saveImageAsJPG(_ image: UIImage) -> URL? {
     guard let data = image.jpegData(compressionQuality: 1.0) else { return nil }
     
