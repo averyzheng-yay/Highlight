@@ -3,7 +3,8 @@
 // Highlight
 //
 
-// Having to type the name every time is error prone and redundant, this is a neat case of improvisation and adds more customisibility
+//This file imports a custom font
+
 import SwiftUI
 
 enum FontWeight {
