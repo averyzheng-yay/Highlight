@@ -16,6 +16,7 @@ struct EntryView: View {
     }
 }
 
+// View that appears when entries are clicked into
 struct PhotoDetailView: View {
     @State private var isEditing = false
     @ObservedObject var photoEntry: PhotoEntries

@@ -13,6 +13,7 @@ struct CollageTabView: View {
     var body: some View {
         NavigationView{
             VStack(spacing: 0){
+                // Gradient at top of screen
                 ZStack{
                     LinearGradient(gradient: Gradient(colors: [Color(red: 0.3, green: 0.5, blue: 1), Color(red: 0.678, green: 0.847, blue: 0.902)]), startPoint: .top, endPoint: .bottom)
                         .edgesIgnoringSafeArea(.all)
@@ -25,6 +26,7 @@ struct CollageTabView: View {
                 }
                 .frame(maxHeight: 100)
                 
+                // Actual collage (and case when no photos are added)
                 VStack {
                     if viewModel.allPhotos.isEmpty {
                         VStack{
@@ -34,11 +36,15 @@ struct CollageTabView: View {
                             Spacer()
                         }
                     } else {
-                        CollageView(entries: viewModel.entries)
-                            .padding()
+                        VStack {
+                            CollageView(entries: viewModel.entries)
+                                .padding()
+                            Spacer()
+                        }
                     }
                 }
                 
+                // Export collage button at bottom: disabled when no photos are uploaded
                 Button(action: {
                     exportCollageAsImage()
                 }) {
@@ -70,13 +76,14 @@ struct CollageTabView: View {
     
 }
 
-// Actual grid-like collage layout view
+// Grid-like collage layout view
 struct CollageView: View {
     let entries: [Entries]
     
     var body: some View {
         GeometryReader { geometry in
             ZStack {
+                // parameters to make sure the entries fit on the screen and are scaled properly
                 let totalEntries = entries.count
                 let aspectRatios = entries.compactMap { entry -> CGFloat? in
                     if let photoEntry = entry as? PhotoEntries {
@@ -99,7 +106,7 @@ struct CollageView: View {
                     if let photoEntry = entries[index] as? PhotoEntries {
                         let aspectRatio = aspectRatios[index]
                         if aspectRatio > 1 {
-                            // Wider than tall
+                            // If wider than tall
                             let width = itemWidth
                             let height = itemWidth / aspectRatio
                             Image(uiImage: photoEntry.image)
@@ -110,10 +117,11 @@ struct CollageView: View {
                                           y: yOffset + height / 2)
                                 .offset(x: CGFloat.random(in: -10...10),
                                         y: CGFloat.random(in: -10...10))
-                                .rotationEffect(.degrees(Double.random(in: -7...7)))
+                                .rotationEffect(.degrees(Double.random(in: -4...4)))
+                                // adds randomness to collage: rotation and physical offset
                             
                         } else {
-                            // Taller than wide
+                            // If taller than wide
                             let width = itemHeight * aspectRatio
                             let height = itemHeight
                             Image(uiImage: photoEntry.image)
@@ -124,7 +132,7 @@ struct CollageView: View {
                                           y: yOffset + height / 2)
                                 .offset(x: CGFloat.random(in: -10...10),
                                         y: CGFloat.random(in: -10...10))
-                                .rotationEffect(.degrees(Double.random(in: -7...7)))
+                                .rotationEffect(.degrees(Double.random(in: -4...4)))
                         }
                     } 
                 }
