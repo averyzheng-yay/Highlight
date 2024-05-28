@@ -38,17 +38,26 @@ struct PhotoDetailView: View {
             Text("Description:")
                 .customFont(.regular,20)
             ScrollView{
-                HStack{
-                    Text(photoEntry.text)
-                        .customFont(.regular,20)
-                        .padding(15)
-                    Spacer()
+                if photoEntry.text.isEmpty {
+                        HStack{
+                            Text("No Description Provided")
+                                .customFont(.regular,20)
+                                .padding(15)
+                            Spacer()
+                        }
+                    }
+                else{
+                    HStack{
+                        Text(photoEntry.text)
+                            .customFont(.regular,20)
+                            .padding(15)
+                        Spacer()
+                    }
                 }
             }
             .background(Color(.systemGray6))
             .frame(height: 220)
             .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-            .clipShape(RoundedRectangle(cornerRadius: 10))
         }
         .padding()
         .navigationTitle("\(photoEntry.date)")
