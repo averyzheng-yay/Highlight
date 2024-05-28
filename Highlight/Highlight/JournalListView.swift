@@ -34,33 +34,33 @@ struct InitEntryView: View {
 // SearchBar for implementing search feature in list
 struct SearchBar: UIViewRepresentable {
     @Binding var text: String
-
+    
     class Coordinator: NSObject, UISearchBarDelegate {
         @Binding var text: String
-
+        
         init(text: Binding<String>) {
             _text = text
         }
-
+        
         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
             text = searchText
         }
-
+        
         func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
             searchBar.resignFirstResponder()
         }
     }
-
+    
     func makeCoordinator() -> Coordinator {
         return Coordinator(text: $text)
     }
-
+    
     func makeUIView(context: UIViewRepresentableContext<SearchBar>) -> UISearchBar {
         let searchBar = UISearchBar(frame: .zero)
         searchBar.delegate = context.coordinator
         return searchBar
     }
-
+    
     func updateUIView(_ uiView: UISearchBar, context: UIViewRepresentableContext<SearchBar>) {
         uiView.text = text
     }
@@ -95,7 +95,7 @@ struct JournalListView: View {
             VStack(spacing: 0) {
                 ZStack{
                     LinearGradient(gradient: Gradient(colors: [Color(red: 0.3, green: 0.5, blue: 1), Color(red: 0.678, green: 0.847, blue: 0.902)]), startPoint: .top, endPoint: .bottom)
-                    .edgesIgnoringSafeArea(.all)
+                        .edgesIgnoringSafeArea(.all)
                     VStack{
                         Spacer()
                         Text("Highlight")
@@ -143,9 +143,9 @@ struct JournalListView: View {
                     }
                     .background(Color(.systemGray6))
                 }
-
+                
                 Spacer(minLength: 20)
-            
+                
                 Button(action: { showingAddEntry.toggle() }) {
                     Text("Add New Entry")
                         .customFont(.regular, 20)

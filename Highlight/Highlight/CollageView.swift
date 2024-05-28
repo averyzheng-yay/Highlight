@@ -9,13 +9,13 @@ import UIKit
 // Second tab view; displays a collage of the photos from the last 30 days
 struct CollageTabView: View {
     @ObservedObject var viewModel: PhotoJournalViewModel
-
+    
     var body: some View {
         NavigationView{
             VStack(spacing: 0){
                 ZStack{
                     LinearGradient(gradient: Gradient(colors: [Color(red: 0.3, green: 0.5, blue: 1), Color(red: 0.678, green: 0.847, blue: 0.902)]), startPoint: .top, endPoint: .bottom)
-                    .edgesIgnoringSafeArea(.all)
+                        .edgesIgnoringSafeArea(.all)
                     VStack{
                         Spacer()
                         Text("Last Month's Collage")
@@ -73,7 +73,7 @@ struct CollageTabView: View {
 // Actual grid-like collage layout view
 struct CollageView: View {
     let entries: [Entries]
-
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack {

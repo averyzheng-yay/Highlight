@@ -22,7 +22,7 @@ struct ContentView: View {
         // Set the color of the selected tab item to blue
         appearance.stackedLayoutAppearance.selected.iconColor = UIColor.systemBlue
         appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.systemBlue]
-
+        
         // Set the color of the unselected tab items to white
         appearance.stackedLayoutAppearance.normal.iconColor = UIColor.white
         appearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.white]

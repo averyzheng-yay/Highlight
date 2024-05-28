@@ -53,7 +53,7 @@ func saveImageAsJPG(_ image: UIImage) -> URL? {
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     @Published var location: CLLocation?
-
+    
     override init() {
         super.init()
         self.locationManager.delegate = self
@@ -61,20 +61,20 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
     }
-
+    
     func startUpdatingLocation() {
         self.locationManager.startUpdatingLocation()
     }
-
+    
     func stopUpdatingLocation() {
         self.locationManager.stopUpdatingLocation()
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let latestLocation = locations.last else { return }
         self.location = latestLocation
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Failed to get location: \(error.localizedDescription)")
     }

@@ -19,7 +19,7 @@ struct EntryView: View {
 struct PhotoDetailView: View {
     @State private var isEditing = false
     @ObservedObject var photoEntry: PhotoEntries
-
+    
     var body: some View {
         VStack {
             Text(photoEntry.title)
@@ -39,13 +39,13 @@ struct PhotoDetailView: View {
                 .customFont(.regular,20)
             ScrollView{
                 if photoEntry.text.isEmpty {
-                        HStack{
-                            Text("No Description Provided")
-                                .customFont(.regular,20)
-                                .padding(15)
-                            Spacer()
-                        }
+                    HStack{
+                        Text("No Description Provided")
+                            .customFont(.regular,20)
+                            .padding(15)
+                        Spacer()
                     }
+                }
                 else{
                     HStack{
                         Text(photoEntry.text)
@@ -82,7 +82,7 @@ struct PhotoDetailView: View {
 struct EditPhotoEntryView: View {
     @ObservedObject var photoEntry: PhotoEntries
     @Environment(\.presentationMode) var presentationMode
-
+    
     var body: some View {
         Form {
             Section(header: Text("Title")) {
@@ -93,7 +93,7 @@ struct EditPhotoEntryView: View {
                 TextEditor(text: $photoEntry.text)
                     .frame(height: 100)
             }
-
+            
             Section(header: Text("Image")) {
                 // Image Picker unnecessary
                 Image(uiImage: photoEntry.image)

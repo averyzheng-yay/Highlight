@@ -57,11 +57,11 @@ struct AddEntryView: View {
                 ZStack {
                     Color(.systemGray6)
                     VStack{
-                    Spacer()
-                    Text("Optional Description Below")
-                        .customFont(.light, 20)
-                    TextEditor(text: $text)
-                        .background(Color(.clear))
+                        Spacer()
+                        Text("Optional Description Below")
+                            .customFont(.light, 20)
+                        TextEditor(text: $text)
+                            .background(Color(.clear))
                     }
                     .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
                 }
