@@ -23,21 +23,32 @@ struct PhotoDetailView: View {
     var body: some View {
         VStack {
             Text(photoEntry.title)
-                .font(.largeTitle)
-                .padding()
+                .customFont(.semiBold, 40)
             Image(uiImage: photoEntry.image)
                 .resizable()
                 .scaledToFit()
-                .padding()
+                .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10))
             if let location = photoEntry.location {
                 Text("Location: \(location.coordinate.latitude), \(location.coordinate.longitude)")
-                    .font(.caption)
+                    .customFont(.regular,20)
             } else {
                 Text("Location: Unknown")
-                    .font(.caption)
+                    .customFont(.regular,20)
             }
-            Text(photoEntry.text)
-                .font(.body)
+            Text("Description:")
+                .customFont(.regular,20)
+            ScrollView{
+                HStack{
+                    Text(photoEntry.text)
+                        .customFont(.regular,20)
+                        .padding(15)
+                    Spacer()
+                }
+            }
+            .background(Color(.systemGray6))
+            .frame(height: 220)
+            .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
+            .clipShape(RoundedRectangle(cornerRadius: 10))
         }
         .padding()
         .navigationTitle("\(photoEntry.date)")
@@ -102,5 +113,8 @@ struct EditPhotoEntryView: View {
         }
     }
 }
+
+
+
 
 
