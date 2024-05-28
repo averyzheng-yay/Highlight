@@ -49,7 +49,7 @@ struct AddEntryView: View {
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFit()
-                        .frame(height: 200)
+                        .frame(height: 180)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .padding()
                 }
@@ -62,12 +62,11 @@ struct AddEntryView: View {
                         .customFont(.light, 20)
                     TextEditor(text: $text)
                         .background(Color(.clear))
-                        .padding(4) // Add padding inside the TextEditor to avoid text touching the edges
                     }
-                    
+                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
                 }
                 .frame(maxWidth: .infinity)
-                .frame(height: 200)
+                .frame(height: 220)
                 .padding(.horizontal, 20)
                 .background(Color(.systemGray6))
                 .clipShape(RoundedRectangle(cornerRadius: 10))
