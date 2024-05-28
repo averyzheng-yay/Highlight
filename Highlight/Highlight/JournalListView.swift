@@ -5,6 +5,7 @@
 
 import SwiftUI
 
+// View used for displaying each entry in the list
 struct InitEntryView: View {
     var ent: Entries
     var body: some View {
@@ -30,6 +31,7 @@ struct InitEntryView: View {
     }
 }
 
+// SearchBar for implementing search feature in list
 struct SearchBar: UIViewRepresentable {
     @Binding var text: String
 
@@ -64,21 +66,25 @@ struct SearchBar: UIViewRepresentable {
     }
 }
 
-
+// First tab view; displays all entries succinctly
 struct JournalListView: View {
     @ObservedObject var viewModel: PhotoJournalViewModel
-    @Binding var showingAddEntry: Bool
+    
+    @Binding var showingAddEntry: Bool // Variable to control AddEntryView
+    
+    // Variables used for searching
     @State private var searchText = ""
     @State private var startDate = Date().addingTimeInterval(-60*60*24*30)
     @State private var endDate = Date()
     
+    // All entries that contain the searchText in the title or description and are in the rnage of dates
     var filteredEntries: [Entries] {
         if searchText.isEmpty {
             return viewModel.entries
         } else {
             return viewModel.entries.filter { entry in
                 let matchesTitleOrDescription = entry.title.localizedCaseInsensitiveContains(searchText) || entry.text.localizedCaseInsensitiveContains(searchText)
-                let matchesDateRange = entry.date >= startDate && entry.date <= endDate.addingTimeInterval(60*60*24)
+                let matchesDateRange = entry.date >= startDate && entry.date <= endDate.addingTimeInterval(60*60*24) // Edge case; adds 24 more hours to the end date
                 return matchesTitleOrDescription && matchesDateRange
             }
         }
@@ -126,19 +132,20 @@ struct JournalListView: View {
                         }
                     }
                 } else {
+                    // Actual list that displays all filtered entries
                     List {
                         ForEach(filteredEntries) { entry in
                             NavigationLink(destination: EntryView(ent: entry)) {
                                 InitEntryView(ent: entry)
                             }
                         }
-                        .onDelete(perform: deleteEntry)
+                        .onDelete(perform: deleteEntry) // entries can be deleted with a swipe
                     }
                     .background(Color(.systemGray6))
                 }
 
                 Spacer(minLength: 20)
-                
+            
                 Button(action: { showingAddEntry.toggle() }) {
                     Text("Add New Entry")
                         .customFont(.regular, 20)
