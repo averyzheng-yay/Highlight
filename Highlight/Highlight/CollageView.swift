@@ -63,7 +63,7 @@ struct CollageTabView: View {
     }
     
     private func exportCollageAsImage() {
-        let collageImage = CollageView(entries: viewModel.entries).asUIImage()
+        let collageImage = CollageTabView(viewModel: viewModel).asUIImage()
         
         if let imageURL = saveImageAsJPG(collageImage) {
             let activityViewController = UIActivityViewController(activityItems: [imageURL], applicationActivities: nil)
